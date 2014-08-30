@@ -7,11 +7,21 @@ module QuickMods
     attr_reader :mod, :format_version, :uid, :repo, :mod_id, :name, :nem_name, :description, :license, :urls,
                 :update_url, :tags, :categories, :authors, :references, :versions, :maven_repos
 
+    REQUIRED_FIELDS = [
+        @format_version,
+        @uid,
+        @repo,
+        @name,
+        @update_url,
+        @versions
+    ]
+
     def initialize(json)
       if json
         if json.is_a? String
           @mod = JSON.parse json
           create_instance_variables
+          check_mod_integrity
         else
           raise StandardError, 'QuickMod JSON must be in the form of a String.'
         end
@@ -37,6 +47,14 @@ module QuickMods
       @references = @mod['references']
       @versions = @mod['versions']
       @maven_repos = @mod['mavenRepos']
+    end
+
+    def check_mod_integrity
+      REQUIRED_FIELDS.each do |field|
+        unless field
+          raise StandardError, "Required Field Not Initialized Correctly: #{field}"
+        end
+      end
     end
 
     def format_version?
