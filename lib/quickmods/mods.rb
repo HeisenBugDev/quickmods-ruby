@@ -167,6 +167,16 @@ module QuickMods
       end
     end
 
+    private
+
+    def github(user, repo, filename, branch = 'master')
+      "https://raw.github.com/#{user}/#{repo}/#{branch}/#{filename}"
+    end
+
+    def mcf(topic_id)
+      "http://www.minecraftforum.net/topic/#{topic_id}"
+    end
+
   end
 
 end
