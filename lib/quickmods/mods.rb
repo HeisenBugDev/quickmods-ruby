@@ -2,8 +2,49 @@ require 'json'
 
 module QuickMods
 
+  # Documentation based on existing documentation found at: https://02jandal.github.io/QuickModDoc/qm_spec.html
   class Mod
 
+    # @!attribute [r] mod
+    #   @return the parsed json
+    # @!attribute [r] format_version
+    #   @return [Integer] The version of the QuickMod format. Currently 1.
+    # @!attribute [r] uid
+    #   @return [String] A java package style id of the QuickMod. Has to be globally unique for the QuickMod,
+    #   and should NEVER change. <author>.<modid> is a good uid,
+    #   but remember it may never change as long as it's still the same mod!
+    # @!attribute [r] repo
+    #   @return [String] A java package style repository id of the QuickMod.
+    #   Has to be globally unique for your repository, and NEVER change.
+    #   Two QuickMods with the same uid and repo are considered exactly equal and will overwrite each other.
+    # @!attribute [r] mod_id
+    #   @return [String] The mod ID of the mod, as used by forge mods.
+    #   It's the name (as used in the 'name' field in the .json file) if it's a LiteLoader mod.
+    # @!attribute [r] name
+    #   @return [String] A descriptive, human readable name
+    # @!attribute [r] nem_name
+    #   @return [String] The name of the mod in NotEnoughMods
+    # @!attribute [r] description
+    #   @return [String] A description of the mod
+    # @!attribute [r] license
+    #   @return [String] The mods license
+    # @!attribute [r] urls
+    #   @return An object of URL types
+    # @!attribute [r] update_url
+    #   @return This URL should point at the QuickMod file, and is used for updating it
+    # @!attribute [r] tags
+    #   @return A list of tags that apply to the mod
+    # @!attribute [r] categories
+    #   @return A list of categories that apply to the mod. Tags and categories might often be more or less the same.
+    # @!attribute [r] authors
+    #   @return Authors that have participated in the creation of the mod
+    # @!attribute [r] references
+    #   @return A list of all mods that are in some way referenced in the versions file
+    # @!attribute [r] versions
+    #   @return [Array] A list of versions
+    #   @see https://02jandal.github.io/QuickModDoc/qm_versions_spec.markdown
+    # @!attribute [r] maven_repos
+    #   @return A list of maven base urls to search for if a downloadType is maven, or for maven dependencies
     attr_reader :mod, :format_version, :uid, :repo, :mod_id, :name, :nem_name, :description, :license, :urls,
                 :update_url, :tags, :categories, :authors, :references, :versions, :maven_repos
 
@@ -22,6 +63,7 @@ module QuickMods
           @mod = JSON.parse json
           create_instance_variables
           check_mod_integrity
+          self
         else
           raise StandardError, 'QuickMod JSON must be in the form of a String.'
         end
