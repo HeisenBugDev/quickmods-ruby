@@ -1,4 +1,3 @@
-quickmods-ruby
-==============
+# QuickMods
 
-Ruby gem for interfacing with quickmods
+Gem allowing for simple interacting with QuickMod JSON files.
