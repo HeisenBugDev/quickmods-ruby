@@ -36,3 +36,7 @@ matrix:
 addons:
   code_climate:
     repo_token: 007e2f8517a8fce21a3e6727b6509617f7d7ee7769d13e99e400cc32ac64963b 
+notifications:
+  slack:
+    rooms:
+      - heisenbugdev:SSDL6aGJHluGmL6WeZ9RdnEh#crafter
