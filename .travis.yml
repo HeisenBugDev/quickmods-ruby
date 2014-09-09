@@ -1,0 +1,38 @@
+language: ruby
+rvm:
+  - 2.1.0
+  - 1.9.3
+  - jruby-19mode
+  - rbx-2
+jdk:
+  - openjdk6
+  - openjdk7
+  - oraclejdk7
+  - oraclejdk8
+matrix:
+  exclude:
+    - rvm: 1.9.3
+      jdk: openjdk6
+    - rvm: 1.9.3
+      jdk: oraclejdk7
+    - rvm: 1.9.3
+      jdk: oraclejdk8
+    - rvm: 2.1.0
+      jdk: openjdk6
+    - rvm: 2.1.0
+      jdk: oraclejdk7
+    - rvm: 2.1.0
+      jdk: oraclejdk8
+    - rvm: rbx-2
+      jdk: openjdk6
+    - rvm: rbx-2
+      jdk: oraclejdk7
+    - rvm: rbx-2
+      jdk: oraclejdk8
+  allow_failures:
+    - jdk:
+      - oraclejdk8
+  fast_finish: true
+addons:
+  code_climate:
+    repo_token: 007e2f8517a8fce21a3e6727b6509617f7d7ee7769d13e99e400cc32ac64963b 
